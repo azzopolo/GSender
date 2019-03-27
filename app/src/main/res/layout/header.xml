@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="7dp">
 
                 <TextView
                     android:id="@+id/green_dot"
@@ -79,6 +79,194 @@
                 android:layout_height="2dp"
                 android:background="@color/text_color" />
 
+            <RelativeLayout
+                android:id="@+id/linear_pickup_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/tv_pic_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/round_green"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+
+                <TextView
+                    android:id="@+id/tv_pick_up_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@id/tv_pic_icon"
+                    android:background="@drawable/bottom_border"
+                    android:hint="pick up"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+                 </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_color" />
+
+            <RelativeLayout
+                android:id="@+id/linear_truck_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/tv_trck_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/round_green"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@id/tv_trck_icon"
+                    android:background="@drawable/bottom_border"
+                    android:hint="Truck type"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/tv_full_trck_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/round_green"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+
+                <TextView
+                    android:id="@+id/tvfull_truck"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@id/tv_full_trck_icon"
+                    android:background="@drawable/bottom_border"
+                    android:hint="Full Truck"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tv_llt_truch"
+                    android:layout_width="15dp"
+                    android:layout_gravity="center"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/round_green"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+
+                <TextView
+                    android:id="@+id/tv_llt_truck"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@id/tv_full_trck_icon"
+                    android:background="@drawable/bottom_border"
+                    android:hint="LLT Truck"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/relative_drop"
@@ -87,7 +275,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="7dp">
 
                 <TextView
                     android:id="@+id/line2"
@@ -131,6 +319,145 @@
                     android:src="@mipmap/ic_clear_black_24dp"
                     android:visibility="visible"
                     tools:ignore="ContentDescription,RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_color" />
+
+            <RelativeLayout
+                android:id="@+id/relative_drop_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/line3"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:background="@drawable/round_red"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tv_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@+id/line3"
+                    android:background="@drawable/bottom_border"
+                    android:hint="drop"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_color" />
+
+            <RelativeLayout
+                android:id="@+id/relative_last_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/line4"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:background="@drawable/round_red"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tv_listing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@+id/line4"
+                    android:background="@drawable/bottom_border"
+                    android:hint="Listing last date"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_color" />
+
+            <RelativeLayout
+                android:id="@+id/relative_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/line5"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:background="@drawable/round_red"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_dehaze_black_24dp"
+                    android:tint="@color/text_color"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tv_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toRightOf="@+id/line5"
+                    android:background="@drawable/bottom_border"
+                    android:hint="Note"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="@color/hint"
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RtlHardcoded" />
+
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -23,7 +23,7 @@
         android:layout_gravity="top"
         android:layout_margin="10dp"
         android:layout_marginBottom="20dip"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <include
             layout="@layout/header"
@@ -38,7 +38,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="10dp"
         android:layout_marginBottom="0dip"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <include
             layout="@layout/footer"
