@@ -48,8 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toLeftOf="@+id/current_location"
                     android:layout_toRightOf="@+id/green_dot"
                     android:background="@drawable/bottom_border"
@@ -59,9 +59,10 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/hint"
-                    android:textColorHint="@color/text_color"
 
-                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+                    android:textColorHint="@color/text_color"
+                    tools:ignore="RelativeOverlap,RtlHardcoded"
+                    tools:text="Alınış Noktası" />
 
                 <ImageView
                     android:id="@+id/current_location"
@@ -105,8 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/tv_pic_icon"
                     android:background="@drawable/bottom_border"
                     android:hint="pick up"
@@ -117,7 +118,8 @@
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
 
-                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+                    tools:ignore="RelativeOverlap,RtlHardcoded"
+                    tools:text="Alınış Tarihi" />
 
                  </RelativeLayout>
 
@@ -152,8 +154,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/tv_trck_icon"
                     android:background="@drawable/bottom_border"
                     android:hint="Truck type"
@@ -163,7 +165,8 @@
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+                    tools:ignore="RelativeOverlap,RtlHardcoded"
+                    tools:text="Araç Türü" />
 
             </RelativeLayout>
 
@@ -202,14 +205,14 @@
                 <TextView
                     android:id="@+id/tvfull_truck"
                     android:layout_width="wrap_content"
-                    android:layout_weight="0.9"
-                    android:clickable="true"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/tv_full_trck_icon"
+                    android:layout_weight="0.9"
                     android:background="@drawable/bottom_border"
+                    android:clickable="true"
                     android:hint="Full Truck"
                     android:inputType="text"
                     android:lines="1"
@@ -217,7 +220,8 @@
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+                    tools:ignore="RelativeOverlap,RtlHardcoded"
+                    tools:text="Komple Araç" />
 
                 <TextView
                     android:id="@+id/tv_llt_truch"
@@ -235,15 +239,15 @@
 
                 <TextView
                     android:id="@+id/tv_llt_truck"
-                    android:clickable="true"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/tv_full_trck_icon"
+                    android:layout_weight="1"
                     android:background="@drawable/bottom_border"
+                    android:clickable="true"
                     android:hint="LLT Truck"
                     android:inputType="text"
                     android:lines="1"
@@ -251,7 +255,8 @@
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+                    tools:ignore="RelativeOverlap,RtlHardcoded"
+                    tools:text="Parça Yük" />
 
 
             </LinearLayout>
@@ -260,6 +265,7 @@
                 android:id="@+id/tv_pick_up_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_toRightOf="@id/tv_full_trck_icon"
                 android:background="@drawable/bottom_border"
                 android:hint="+Person"
@@ -268,10 +274,10 @@
                 android:maxLines="1"
                 android:paddingRight="5dp"
                 android:paddingBottom="5dp"
-                android:layout_gravity="right"
                 android:textColor="@color/hint"
                 android:textColorHint="@color/text_color"
-                tools:ignore="RelativeOverlap,RtlHardcoded" />
+                tools:ignore="RelativeOverlap,RtlHardcoded"
+                tools:text="Yük Alma Yetkilisi" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -319,9 +325,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toLeftOf="@+id/clear"
                     android:layout_toRightOf="@+id/line2"
                     android:background="@drawable/bottom_border"
@@ -331,7 +336,8 @@
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    tools:text="Teslim Noktası" />
 
                 <ImageView
                     android:id="@+id/clear"
@@ -377,19 +383,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/line3"
                     android:background="@drawable/bottom_border"
-                    android:hint="drop"
                     android:clickable="false"
+                    android:hint="drop"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    tools:text="Teslim Tarihi" />
 
             </RelativeLayout>
 
@@ -424,19 +430,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/line4"
                     android:background="@drawable/bottom_border"
-                    android:hint="Listing last date"
                     android:clickable="false"
+                    android:hint="Listing last date"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    tools:text="İhale Kağanış Tarihi" />
 
             </RelativeLayout>
 
@@ -473,18 +479,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/line5"
                     android:background="@drawable/bottom_border"
-                    android:hint="Note"
-                    android:textSize="14dp"
+                    android:hint="Notunuz"
                     android:lines="1"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/hint"
                     android:textColorHint="@color/text_color"
+                    android:textSize="14dp"
                     tools:ignore="RtlHardcoded" />
 
             </RelativeLayout>
@@ -493,6 +498,7 @@
                 android:id="@+id/tv_drop_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_toRightOf="@id/tv_full_trck_icon"
                 android:background="@drawable/bottom_border"
                 android:hint="+Person"
@@ -501,10 +507,10 @@
                 android:maxLines="1"
                 android:paddingRight="5dp"
                 android:paddingBottom="5dp"
-                android:layout_gravity="right"
                 android:textColor="@color/hint"
                 android:textColorHint="@color/text_color"
-                tools:ignore="RelativeOverlap,RtlHardcoded" />
+                tools:ignore="RelativeOverlap,RtlHardcoded"
+                tools:text="Yük Telik Yetkilisi" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

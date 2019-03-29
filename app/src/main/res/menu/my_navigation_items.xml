@@ -3,29 +3,29 @@
     <item
         android:id="@+id/home"
         android:icon="@mipmap/ic_home_black_24dp"
-        android:title="Home"></item>
+        android:title="ARAÇ FORMU"></item>
     <item
         android:id="@+id/pending_requests"
         android:icon="@mipmap/ic_hourglass_empty_black_24dp"
-        android:title="Pending Requests"></item>
+        android:title="TALEPLERİM"></item>
     <item
         android:id="@+id/accepted_requests"
         android:icon="@mipmap/ic_hourglass_full_black_24dp"
-        android:title="Accepted Requests"></item>
+        android:title="TAŞIMALARIM"></item>
     <item
         android:id="@+id/completed_rides"
         android:icon="@mipmap/ic_thumb_up_black_24dp"
-        android:title="Completed Rides"></item>
+        android:title="GEÇMİŞ TAŞIMALARI"></item>
     <item
         android:id="@+id/cancelled"
         android:icon="@mipmap/ic_cancel_black_24dp"
-        android:title="Cancelled"></item>
+        android:title="İPTALLER"></item>
     <item
         android:id="@+id/profile"
         android:icon="@mipmap/ic_account_circle_black_24dp"
-        android:title="Profile"></item>
+        android:title="PROFİL"></item>
     <item
         android:id="@+id/logout"
         android:icon="@mipmap/ic_power_settings_new_black_24dp"
-        android:title="Log out"></item>
+        android:title="ÇIKIŞ"></item>
 </menu>
