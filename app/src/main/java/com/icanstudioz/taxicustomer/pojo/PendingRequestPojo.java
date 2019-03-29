@@ -25,6 +25,62 @@ public class PendingRequestPojo implements Serializable{
     private String user_name;
     private String driver_mobile;
 
+    private String FullTotalW;
+    private String FullTotalL;
+    private String OffersCount;
+    private String OfferMinValue;
+    private String PickupDate;
+    private String DropListDate;
+
+
+    public String getFullTotalW() {
+        return FullTotalW;
+    }
+
+    public void setFullTotalW(String fullTotalW) {
+        FullTotalW = fullTotalW;
+    }
+
+    public String getFullTotalL() {
+        return FullTotalL;
+    }
+
+    public void setFullTotalL(String fullTotalL) {
+        FullTotalL = fullTotalL;
+    }
+
+    public String getDropListDate() {
+        return DropListDate;
+    }
+
+    public void setDropListDate(String dropListDate) {
+        DropListDate = dropListDate;
+    }
+
+    public String getOfferMinValue() {
+        return OfferMinValue;
+    }
+
+    public void setOfferMinValue(String offerMinValue) {
+        OfferMinValue = offerMinValue;
+    }
+
+    public String getOffersCount() {
+        return OffersCount;
+    }
+
+    public void setOffersCount(String offersCount) {
+        OffersCount = offersCount;
+    }
+
+    public String getPickupDate() {
+        return PickupDate;
+    }
+
+    public void setPickupDate(String pickupDate) {
+        PickupDate = pickupDate;
+    }
+
     public String getPayment_mode() {
         return payment_mode;
     }

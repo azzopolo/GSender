@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mega"
+        android:title="MEGA TENTELİ TIR" />
+    <item
+        android:title="KAPALI TIR" />
+    <item
+        android:title="AÇIK TIR" />
+
+    <item
+        android:id="@+id/kapa"
+        android:title="KAPALIKAMYON 8 TEKER" />
+
+    <item
+        android:id="@+id/kip"
+        android:title="KIRKAYAK" />
+
+    <item
+        android:id="@+id/kap"
+        android:title="KAPALI KIRKAYAK" />
+
+    <item
+        android:title="KAMYON 10 TEKER" />
+
+    <item
+        android:title="KAPALI KAMYON 10 TEKER" />
+
+    <item
+        android:title="KAMYONET" />
+
+    <item
+        android:title="FRIGOLU" />
+
+    <item
+        android:title="MINIVAN" />
+
+    <item
+        android:title="DAMPERKASA" />
+
+    <item
+        android:title="LOWBED" />
+
+</menu>

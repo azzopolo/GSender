@@ -95,6 +95,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="1dp">
 
                 <ImageView

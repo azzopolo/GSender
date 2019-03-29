@@ -2,6 +2,7 @@ package com.icanstudioz.taxicustomer.fragement;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -20,15 +21,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -94,6 +98,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -111,7 +116,7 @@ import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class HomeFragment extends FragmentManagePermission implements OnMapReadyCallback, DirectionCallback, Animation.AnimationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, View.OnClickListener {
     private static final String TAG = "HomeFragment";
     private String driver_id;
     private String cost;
@@ -132,7 +137,9 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
     Animation animFadeIn, animFadeOut;
 
     TextView pickup_location, drop_location, tvfull_truck, tv_llt_truck,
-            tv_pick_up_date, tv_drop, tv_listing, tv_note;
+            tv_pick_up_date, tv_truck_type, tv_drop, tv_listing, tv_drop_person, tv_pick_up_person;
+
+    EditText et_note;
 
     RelativeLayout relative_drop, relative_drop_date, relative_last_date, relative_note;
     RelativeLayout linear_pickup, linear_pickup_date, linear_truck_type;
@@ -148,10 +155,12 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
     ProgressBar progressBar;
     private PlacesClient placesClient;
 
-    String pickUpFullName, pickUpPhone, pickUpAddress;
+    String pickUpFullName, pickUpPhone, pickUpAddress, truckType;
     String dropFullName, dropPhone, dropAddress;
     String TotalW, TotalL, place_count, strWidth, strLength, strHeight, strWeight;
+    String pickUpDate, dropDate, listingLastDate;
     String strNote;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
     public void onDetach() {
@@ -221,7 +230,7 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                     }
                 }
             });
-            linear_request.setOnClickListener(new View.OnClickListener() {
+            rootView.findViewById(R.id.request_rides).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (CheckConnection.haveNetworkConnection(getActivity())) {
@@ -231,17 +240,57 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                             Toast.makeText(getActivity(), getString(R.string.select_drop_location), Toast.LENGTH_LONG).show();
                         } else if (pickup == null || drop == null) {
                             Toast.makeText(getActivity(), getString(R.string.invalid_location), Toast.LENGTH_LONG).show();
-                        } else if (driver_id == null || drivername == null) {
-                            Toast.makeText(getActivity(), getString(R.string.select_driver), Toast.LENGTH_LONG).show();
-                        } else if (cost == null || unit == null) {
-                            Toast.makeText(getActivity(), getString(R.string.invalid_fare), Toast.LENGTH_SHORT).show();
-                        } else {
+//                        } else if (driver_id == null || drivername == null) {
+//                            Toast.makeText(getActivity(), getString(R.string.select_driver), Toast.LENGTH_LONG).show();
+//                        } else if (cost == null || unit == null) {
+//                            Toast.makeText(getActivity(), getString(R.string.invalid_fare), Toast.LENGTH_SHORT).show();
+                        }else if (tv_pick_up_date.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select pick up date", Toast.LENGTH_LONG).show();
+                        } else if (tv_truck_type.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select truck type", Toast.LENGTH_LONG).show();
+                        } else if (tvfull_truck.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select full truck", Toast.LENGTH_LONG).show();
+                        } else if (tv_llt_truck.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select pick up datellt truck", Toast.LENGTH_LONG).show();
+                        }  else if (tv_drop.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select drop date", Toast.LENGTH_LONG).show();
+                        }  else if (tv_listing.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "select listing last date", Toast.LENGTH_LONG).show();
+                        }  else if (et_note.getText().toString().trim().equals("")) {
+                            Toast.makeText(getActivity(), "input note", Toast.LENGTH_LONG).show();
+                        }
+
+                        else {
                             Bundle bundle = new Bundle();
                             pass.setFromPlace(pickup);
                             pass.setToPlace(drop);
-                            pass.setDriverId(driver_id);
-                            pass.setFare(cost);
-                            pass.setDriverName(drivername);
+
+                            pass.setPick_up_date(pickUpDate);
+                            pass.setTruck_type(truckType);
+                            pass.setPickupFullName(pickUpFullName);
+                            pass.setPickupPhone(pickUpPhone);
+                            pass.setPickupAdress(pickUpAddress);
+
+                            pass.setDrop_date(dropDate);
+                            pass.setLiting_date(listingLastDate);
+                            pass.setDropFullName(dropFullName);
+                            pass.setDropPhone(dropPhone);
+                            pass.setDropAddress(dropAddress);
+
+                            pass.setFullTotalW(TotalW);
+                            pass.setFullTotalL(TotalL);
+
+                            pass.setLLTPieceCount(place_count);
+                            pass.setLLTWight(strWidth);
+                            pass.setLLTHeight(strHeight);
+                            pass.setLLTLenght(strLength);
+                            pass.setLLTWeight(strWeight);
+
+                            pass.setNote(et_note.getText().toString());
+
+                            pass.setDriverId("");
+                            pass.setFare("12");
+                            pass.setDriverName("");
                             bundle.putSerializable("data", pass);
                             RequestFragment fragobj = new RequestFragment();
                             fragobj.setArguments(bundle);
@@ -254,35 +303,17 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                 }
             });
 
-            linear_pickup_date.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pick_up_dialog(false, "Pick up person");
-                }
-            });
-
-            linear_request.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-
-            linear_truck_type.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-
-            relative_drop_date.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pick_up_dialog(false, "Drop person");
-                }
-            });
+            tv_drop_person.setOnClickListener(this);
+            tv_pick_up_person.setOnClickListener(this);
+            linear_pickup_date.setOnClickListener(this);
+            linear_request.setOnClickListener(this);
+            linear_truck_type.setOnClickListener(this);
+            relative_drop_date.setOnClickListener(this);
+            relative_last_date.setOnClickListener(this);
+            tvfull_truck.setOnClickListener(this);
+            tv_llt_truck.setOnClickListener(this);
+            tv_pick_up_date.setOnClickListener(this);
+            tv_truck_type.setOnClickListener(this);
 
             pickup_location.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -293,7 +324,7 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                      startActivityForResult(intent, PLACE_PICKER_REQUEST);*/
 
 
-                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
 // Start the autocomplete intent.
                     Intent intent = new Autocomplete.IntentBuilder(
@@ -313,7 +344,7 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
 
                   */
 
-                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
 // Start the autocomplete intent.
                     Intent intent = new Autocomplete.IntentBuilder(
@@ -395,13 +426,11 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                     pickUpAddress = input_address.getText().toString().trim();
                     pickUpPhone = input_phone.getText().toString().trim();
 
-                    tv_pick_up_date.setText(pickUpFullName);
                 } else {
                     dropFullName = input_full_name.getText().toString().trim();
                     dropAddress = input_address.getText().toString().trim();
                     dropPhone = input_phone.getText().toString().trim();
 
-                    tv_drop.setText(pickUpFullName);
                 }
                 dialog.cancel();
             }
@@ -409,6 +438,118 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
         dialog.show();
 
     }
+
+    public void fullTrack_dialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.full_track_dialog);
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+        final EditText input_total_lenght = (EditText) dialog.findViewById(R.id.input_total_lenght);
+        final EditText input_total_w = (EditText) dialog.findViewById(R.id.input_total_w);
+
+        AppCompatButton btn_change = (AppCompatButton) dialog.findViewById(R.id.set_pick_up);
+
+        btn_change.setText(getString(R.string.change));
+
+        btn_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    CheckConnection.hideKeyboard(getActivity(), view);
+                }
+
+                TotalW = input_total_w.getText().toString().trim();
+                TotalL = input_total_lenght.getText().toString().trim();
+
+                tvfull_truck.setText(TotalW + " " + TotalL);
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+
+    }
+
+    public void date_pick_dialog(int pos){
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        String str_date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        switch (pos){
+                            case 0:
+                                pickUpDate = str_date;
+                                tv_pick_up_date.setText(str_date);
+                                break;
+                            case 1:
+                                dropDate = str_date;
+                                tv_drop.setText(str_date);
+                                break;
+                            case 2:
+                                listingLastDate = str_date;
+                                tv_listing.setText(str_date);
+                                break;
+                        }
+                    }
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.show();
+    }
+
+    public void LLTTrack_dialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.llt_track_dialog);
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+        final EditText input_piece_count = (EditText) dialog.findViewById(R.id.input_piece_count);
+        final EditText input_wight = (EditText) dialog.findViewById(R.id.input_wight);
+        final EditText input_lenght = (EditText) dialog.findViewById(R.id.input_lenght);
+        final EditText input_height = (EditText) dialog.findViewById(R.id.input_height);
+        final EditText input_weight = (EditText) dialog.findViewById(R.id.input_weight);
+
+        AppCompatButton btn_change = (AppCompatButton) dialog.findViewById(R.id.set_pick_up);
+
+        btn_change.setText(getString(R.string.change));
+
+        btn_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    CheckConnection.hideKeyboard(getActivity(), view);
+                }
+
+                strLength = input_lenght.getText().toString().trim();
+                strHeight = input_height.getText().toString().trim();
+                strWeight = input_weight.getText().toString().trim();
+                strWidth = input_wight.getText().toString().trim();
+                place_count = input_piece_count.getText().toString().trim();
+
+                tv_llt_truck.setText(strLength + " " + strHeight);
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+
+    }
+
 
     @Override
     public void onPause() {
@@ -566,20 +707,25 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
         drop_location = (TextView) rootView.findViewById(R.id.drop_location);
         linear_pickup = (RelativeLayout) rootView.findViewById(R.id.linear_pickup);
         relative_drop = (RelativeLayout) rootView.findViewById(R.id.relative_drop);
+
         /*mPlaceDetectionClient = Places.getPlaceDetectionClient(getActivity(), null);*/
 
+        tv_truck_type = rootView.findViewById(R.id.tv_truck_type);
         tvfull_truck = rootView.findViewById(R.id.tvfull_truck);
         tv_llt_truck = rootView.findViewById(R.id.tv_llt_truck);
         tv_pick_up_date = rootView.findViewById(R.id.tv_pick_up_date);
         tv_drop = rootView.findViewById(R.id.tv_drop);
         tv_listing = rootView.findViewById(R.id.tv_listing);
-        tv_note = rootView.findViewById(R.id.tv_note);
+        et_note = rootView.findViewById(R.id.et_note);
+        tv_drop_person = rootView.findViewById(R.id.tv_drop_person);
+        tv_pick_up_person = rootView.findViewById(R.id.tv_pick_up_person);
 
         relative_drop_date = rootView.findViewById(R.id.relative_drop_date);
         relative_last_date = rootView.findViewById(R.id.relative_last_date);
         relative_note = rootView.findViewById(R.id.relative_note);
         linear_pickup_date = rootView.findViewById(R.id.linear_pickup_date);
         linear_truck_type = rootView.findViewById(R.id.linear_truck_type);
+
 
         mMapView.getMapAsync(this);
         mMapView.onCreate(savedInstanceState);
@@ -729,7 +875,7 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
                     });*/
 
                     // Use fields to define the data types to return.
-                    List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                    List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
 // Use the builder to create a FindCurrentPlaceRequest.
                     FindCurrentPlaceRequest request =
@@ -1061,7 +1207,6 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
 
     }
 
-
     private String getAdd(double latitude, double longitude) {
         String finalAddress = null;
         try {
@@ -1083,6 +1228,54 @@ public class HomeFragment extends FragmentManagePermission implements OnMapReady
 
         }
         return finalAddress;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_drop_person:
+                pick_up_dialog(false, "Drop person");
+                break;
+            case R.id.tv_pick_up_person:
+                pick_up_dialog(true, "Pick up person");
+                break;
+
+            case R.id.tvfull_truck:
+                fullTrack_dialog();
+                break;
+
+            case R.id.tv_llt_truck:
+                LLTTrack_dialog();
+                break;
+
+            case R.id.linear_pickup_date:
+            case R.id.tv_pick_up_date:
+                date_pick_dialog(0);
+                break;
+
+            case R.id.relative_last_date:
+                date_pick_dialog(2);
+                break;
+
+            case R.id.relative_drop_date:
+                date_pick_dialog(1);
+                break;
+
+            case R.id.linear_truck_type:
+            case R.id.tv_truck_type:
+                PopupMenu popup = new PopupMenu(getActivity(), linear_truck_type);
+                popup.getMenuInflater().inflate(R.menu.truck_type, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        truckType = item.getTitle().toString();
+                        tv_truck_type.setText(truckType);
+                        return true;
+                    }
+                });
+                popup.show();
+                break;
+        }
     }
 }
 

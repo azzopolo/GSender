@@ -108,23 +108,23 @@ public class RequestFragment extends FragmentManagePermission implements OnMapRe
                 if (!CheckConnection.haveNetworkConnection(getActivity())) {
                     Toast.makeText(getActivity(), networkAvailable, Toast.LENGTH_LONG).show();
                 } else {
-                    if (distance == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_distance), Toast.LENGTH_LONG).show();
-                    } else if (pickup_address == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_pickupaddress), Toast.LENGTH_SHORT).show();
-                    } else if (drop_address == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_dropaddress), Toast.LENGTH_SHORT).show();
-                    } else if (fare == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_fare), Toast.LENGTH_SHORT).show();
-                    } else if (origin == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_pickuplocation), Toast.LENGTH_SHORT).show();
-                    } else if (destination == null) {
-                        Toast.makeText(getActivity(), getString(R.string.invalid_droplocation), Toast.LENGTH_SHORT).show();
-                    } else {
+//                    if (distance == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_distance), Toast.LENGTH_LONG).show();
+//                    } else if (pickup_address == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_pickupaddress), Toast.LENGTH_SHORT).show();
+//                    } else if (drop_address == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_dropaddress), Toast.LENGTH_SHORT).show();
+//                    } else if (fare == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_fare), Toast.LENGTH_SHORT).show();
+//                    } else if (origin == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_pickuplocation), Toast.LENGTH_SHORT).show();
+//                    } else if (destination == null) {
+//                        Toast.makeText(getActivity(), getString(R.string.invalid_droplocation), Toast.LENGTH_SHORT).show();
+//                    } else {
                         String o = origin.latitude + "," + origin.longitude;
                         String d = destination.latitude + "," + destination.longitude;
                         AddRide(SessionManager.getKEY(), pickup_address, drop_address, o, d, String.valueOf(finalfare), distance);
-                    }
+//                    }
                 }
 
 
@@ -312,14 +312,39 @@ public class RequestFragment extends FragmentManagePermission implements OnMapRe
 
     public void AddRide(String key, String pickup_adress, String drop_address, String pickup_location, String drop_locatoin, String amount, String distance) {
         final RequestParams params = new RequestParams();
-        params.put("driver_id", driver_id);
+//        params.put("driver_id", driver_id);
         params.put("user_id", user_id);
         params.put("pickup_adress", pickup_adress);
         params.put("drop_address", drop_address);
         params.put("pikup_location", pickup_location);
         params.put("drop_locatoin", drop_locatoin);
         params.put("amount", amount);
+        params.put("payment_status", "");
+        params.put("payment_mode", "");
         params.put("distance", distance);
+
+        params.put("PickupDate", pass.getPick_up_date());
+        params.put("PickupTruckType", pass.getTruck_type());
+        params.put("PickupFullName", pass.getPickupFullName());
+        params.put("PickupPhone", pass.getPickupPhone());
+        params.put("PickupAdress", pass.getPickupAdress());
+
+        params.put("DropDate", pass.getDrop_date());
+        params.put("DropListDate", pass.getLiting_date());
+        params.put("DropFullName", pass.getDropFullName());
+        params.put("DropPhone", pass.getDropPhone());
+        params.put("DropAdress", pass.getDropAddress());
+
+        params.put("FullTotalW", pass.getFullTotalW());
+        params.put("FullTotalL", pass.getFullTotalL());
+        params.put("LLTPieceCount", pass.getLLTPieceCount());
+        params.put("LLTWight", pass.getLLTWight());
+        params.put("LLTLenght", pass.getLLTLenght());
+        params.put("LLTHeight", pass.getLLTHeight());
+        params.put("LLTWeight", pass.getLLTWeight());
+
+        params.put("Note", pass.getNote());
+
         Server.setHeader(key);
         Server.post("api/user/addRide/format/json", params, new JsonHttpResponseHandler() {
             @Override

@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import com.icanstudioz.taxicustomer.R;
 import com.icanstudioz.taxicustomer.acitivities.HomeActivity;
 import com.icanstudioz.taxicustomer.fragement.AcceptedDetailFragment;
+import com.icanstudioz.taxicustomer.fragement.AcceptedDetailFragment1;
 import com.icanstudioz.taxicustomer.pojo.PendingRequestPojo;
 
 /**
@@ -40,7 +42,9 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
         final PendingRequestPojo pojo = list.get(position);
         holder.from_add.setText(pojo.getPickup_adress());
         holder.to_add.setText(pojo.getDrop_address());
-        holder.drivername.setText(pojo.getDriver_name());
+        holder.drivername.setText(pojo.getOfferMinValue() + " TL");
+        holder.dn.setText(pojo.getFullTotalW() + " KG / " + pojo.getFullTotalL() + " M");
+
 
         try {
             SimpleDateFormat toFullDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -50,8 +54,11 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
             SimpleDateFormat date = new SimpleDateFormat("dd-MMMM-yyyy");
 
             String shortTimedate = date.format(fullDate);
-            holder.time.setText(shortTime);
-            holder.date.setText(shortTimedate);
+            holder.time.setText(pojo.getAmount() + " TL");
+            holder.tiime.setText(getendformattedTime(pojo.getDropListDate()));
+            holder.count.setText(pojo.getOffersCount() + " TEKLIF");
+
+//            holder.date.setText(shortTimedate);
         } catch (ParseException e) {
 
         }
@@ -62,7 +69,7 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("data", pojo);
-                AcceptedDetailFragment detailFragment = new AcceptedDetailFragment();
+                AcceptedDetailFragment1 detailFragment = new AcceptedDetailFragment1();
                 detailFragment.setArguments(bundle);
                 ((HomeActivity) holder.itemView.getContext()).changeFragment(detailFragment, "Passenger Information");
             }
@@ -79,6 +86,33 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
 
     }
 
+    public static String getendformattedTime(String time) {
+        String formattedtime = "";
+        Log.d("END_TIME", time + "  ");
+        if (time == null) return time;
+        if (time.equals("null")) return time;
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(time);
+
+            Date currentTime = Calendar.getInstance().getTime();
+            long diffInMs = date.getTime() - currentTime.getTime();
+            long hours = diffInMs / (1000 * 60 * 60);
+
+            int days = (int) hours / 24;
+            int hour = (int) hours % 24;
+
+            if (diffInMs > 0)
+                formattedtime = days + " days " + hour + " hours";
+            else
+                formattedtime = "expired";
+
+        } catch (ParseException e) {
+            Log.d("END_TIME", e.toString());
+        }
+
+        return formattedtime;
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -88,7 +122,7 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
 
 
         TextView  drivername, from_add, to_add, date, time;
-        TextView f, t, dn, dt;
+        TextView f, t, dn, dt, tiime, count;
 
         public Holder(View itemView) {
             super(itemView);
@@ -98,6 +132,8 @@ public class AcceptedRequestAdapter extends RecyclerView.Adapter<AcceptedRequest
 
             dn = (TextView) itemView.findViewById(R.id.drivername);
             dt = (TextView) itemView.findViewById(R.id.datee);
+            tiime = itemView.findViewById(R.id.tiime);
+            count = itemView.findViewById(R.id.count);
 
 
             drivername = (TextView) itemView.findViewById(R.id.txt_drivername);
